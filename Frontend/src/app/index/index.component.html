@@ -1,0 +1,93 @@
+<header class="navbar navbar-bright navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a routerLink='/books' *ngIf="libraryService.loggedIn()">Posts</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-right navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
+          <ul class="dropdown-menu" style="padding:12px;">
+            <form class="form-inline">
+              <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
+            </form>
+          </ul>
+        </li>
+        <li>
+          <a routerLink="/login" *ngIf="!libraryService.loggedIn()">Login</a>
+       </li>
+       <li>
+        <a routerLink="/signup" *ngIf="!libraryService.loggedIn()">Signup</a>
+      </li>
+      <li><a *ngIf="libraryService.loggedIn()" (click)="logoutUser()">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div id="masthead">  
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>{{title}}
+            <p class="lead"></p>
+          </h1>
+        </div>
+        <!-- <div class="col-md-5">
+          <div class="well well-lg">  -->
+            <div class="row">
+              <div class="col-sm-8">
+                
+              
+              </div>
+            </div>
+          <!-- </div>
+        </div> -->
+      </div> 
+    </div><!-- /cont -->
+    
+    <div class="container">
+      <div class="row row1">
+        <div class="col-md-8">
+          <div class="top-spacer"></div>
+        </div>
+      </div> 
+    </div><!-- /cont -->
+    
+  </div>
+  
+  
+  <div class="container">
+    <div class="row row1">
+      
+      <div class="col-md-8"> 
+        
+        <div class="panel">
+          <div class="panel-body">
+            
+            
+            
+            <!--/stories-->
+            <!-- <%for(i=0;i<books.length;i++){%> -->
+            <p style="font-family:courier,'new courier';font-size: 30px;" > Always worried about not getting a space for expressing your thoughts and ideas? You don't have to go anwhere else !! <br><br> Let it be anything.... Complaints, Suggestions, Ideas, Solutions and anything and everything which need to be addressed can be posted here. <br><br> <b>Just Voice Up!!!</b></p>
+            <!-- <%}%> -->
+  
+            
+          </div>
+        </div>
+                                                                                         
+                                                      
+                                                        
+         </div><!--/col-12-->
+    </div>
+  </div>
+                             

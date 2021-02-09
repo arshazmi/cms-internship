@@ -1,0 +1,19 @@
+
+Please do run backend and frontend separately after installing required packages.
+
+
+
+                                   Login credentials :-
+        Admin Privileges( CRUD):
+
+Username/Email: admin
+Password: admin
+
+
+
+
+        user(if needed),(CR):
+
+Username/Email: maryL OR maryL@gmail.com
+Password: maryL@123
+
