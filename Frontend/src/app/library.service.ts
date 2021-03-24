@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BookModel} from './book.model'
+import {BlogModel} from './blog.model'
 import { UserModel } from './user.model';
 
 @Injectable({
@@ -9,13 +9,14 @@ import { UserModel } from './user.model';
 export class LibraryService {
   readonly baseurl='http://localhost:3000';
   constructor(private http:HttpClient) { }
-  getBooks(){
+  
+  getBlogs(){
     return this.http.get(this.baseurl)
   }
-  getBook(_id:string){
-    return this.http.get(this.baseurl+`/books/${_id}`)
+  getBlog(_id:string){
+    return this.http.get(this.baseurl+`/blogs/${_id}`)
   }
-  newBook(item:BookModel,file:File){
+  newBlog(item:BlogModel,file:File){
     
     const formdata=new FormData();
     formdata.append('img',file);
@@ -24,13 +25,13 @@ export class LibraryService {
     formdata.append('genre',item.genre);
     formdata.append('details',item.details);
     formdata.append('link',item.link);
-    return this.http.post(this.baseurl+`/addbook`,formdata)
+    return this.http.post(this.baseurl+`/addblog`,formdata)
     .subscribe(data=>{console.log(data)})
   }
-  deleteBook(_id:string){
-    return this.http.delete(this.baseurl+`/books/deletebook/${_id}`)
+  deleteBlog(_id:string){
+    return this.http.delete(this.baseurl+`/blogs/deleteblog/${_id}`)
   }
-  editBook(_id:string,item:BookModel,file:File){
+  editBlog(_id:string,item:BlogModel,file:File){
     const formdata=new FormData();
     formdata.append('img',file);
     formdata.append('title',item.title);
@@ -38,7 +39,7 @@ export class LibraryService {
     formdata.append('genre',item.genre);
     formdata.append('details',item.details);
     formdata.append('link',item.link);
-    return this.http.put(this.baseurl+`/books/editbook/${_id}`,formdata)
+    return this.http.put(this.baseurl+`/blogs/editblog/${_id}`,formdata)
     .subscribe((data)=>{
       console.log(data);
     })
@@ -48,6 +49,19 @@ export class LibraryService {
     return this.http.post(this.baseurl+`/adduser`,{"user":item})
     .subscribe(data=>{console.log(data)})
   }
+  getAdmins(){
+    return this.http.get(this.baseurl)
+  }
+  
+  deleteAdmin(_id:string){
+    return this.http.delete(this.baseurl+`/admins/deleteadmin/${_id}`)
+  }
+  
+  newAdmin(item:UserModel){
+    return this.http.post(this.baseurl+`/addadmin`,{"user":item})
+    .subscribe(data=>{console.log(data)})
+  }
+  
   validateUser(user:any){
     return this.http.post<any>(this.baseurl+`/validateuser`,{"user":user})
   }

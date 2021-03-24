@@ -1,7 +1,6 @@
 const express = require('express');
 const signRouter=express.Router();
 const Userdata=require("../model/userdata");
-// const Bookdata= require("../model/bookdata");
 const jwt=require('jsonwebtoken')
 function router(){
    signRouter.post('/validateuser',function(req,res){
@@ -21,8 +20,9 @@ function router(){
                 
                 
     })
-   });    
-    signRouter.post('/adduser',function(req,res){
+   });  
+     
+   signRouter.post('/adduser',function(req,res){
     res.header("Access-Control-Allow-Origin", "*")
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS")
         var item = {
@@ -36,6 +36,21 @@ function router(){
         var user= Userdata(item);
         user.save();
     });
+    signRouter.post('/addadmin',function(req,res){
+        res.header("Access-Control-Allow-Origin", "*")
+        res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS")
+            var item = {
+                fname:req.body.user.fname,
+                lname:req.body.user.lname,
+                username:req.body.user.username,
+                email:req.body.user.email,
+                password:req.body.user.password,
+                permission:"admin"
+            }
+            var user= Userdata(item);
+            user.save();
+        });
+
    
     return signRouter;
 }

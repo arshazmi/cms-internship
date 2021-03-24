@@ -1,35 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LibraryService } from '../library.service';
-import {BookModel} from '../book.model'
+import {BlogModel} from '../blog.model'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 @Component({
-  selector: 'app-editbook',
-  templateUrl: './editbook.component.html',
-  styleUrls: ['./editbook.component.css']
+  selector: 'app-editblog',
+  templateUrl: './editblog.component.html',
+  styleUrls: ['./editblog.component.css']
 })
-export class EditbookComponent implements OnInit {
+export class EditblogComponent implements OnInit {
+
   id:string='';
   selectedFile=null;
   editForm:FormGroup;
   constructor( public libraryService:LibraryService,private router:Router,private route:ActivatedRoute,private formBuilder:FormBuilder) { }
-  bookItem=new BookModel('','','',null,'','','')
+  blogItem=new BlogModel('','','',null,'','','')
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id']; // (+) converts string 'id' to a number    
-      this.libraryService.getBook(this.id)
+      this.libraryService.getBlog(this.id)
       .subscribe((data)=>{
-        this.bookItem= JSON.parse(JSON.stringify(data));
+        this.blogItem= JSON.parse(JSON.stringify(data));
     }) 
     const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,})[/\\w .-]*/?';
     this.editForm =this.formBuilder.group({
-      'title':[this.bookItem.title,[Validators.required]],
-      'author':[this.bookItem.author,[Validators.required]],
-      'genre':[this.bookItem.genre,[Validators.required]],
-      'details':[this.bookItem.details,[Validators.required]],
-      'link':[this.bookItem.link,[Validators.required]],
-      'img':[this.bookItem.img,[Validators.required]],
+      'title':[this.blogItem.title,[Validators.required]],
+      'author':[this.blogItem.author,[Validators.required]],
+      'genre':[this.blogItem.genre,[Validators.required]],
+      'details':[this.blogItem.details,[Validators.required]],
+      'link':[this.blogItem.link,[Validators.required]],
+      'img':[this.blogItem.img,[Validators.required]],
     })   
     });
 
@@ -38,10 +38,10 @@ export class EditbookComponent implements OnInit {
     this.selectedFile=event.target.files[0]
 
   }
-  EditBookfn(){
-    this.libraryService.editBook(this.id,this.bookItem,this.selectedFile);
+  EditBlogfn(){
+    this.libraryService.editBlog(this.id,this.blogItem,this.selectedFile);
     alert("successfully edited");
-    this.router.navigate(['/books']);
+    this.router.navigate(['/blogs']);
   }
   logoutUser(){
     localStorage.removeItem('token');

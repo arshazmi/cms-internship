@@ -1,6 +1,6 @@
 const express = require('express');
 const addRouter=express.Router();
-const Bookdata=require("../model/bookdata");
+const Blogdata=require("../model/blogdata");
 const multer= require ('multer');
 const cors = require('cors');
 const jwt=require('jsonwebtoken')
@@ -36,11 +36,12 @@ function verifyToken(req,res,next){
     next()  
 }
 function router(){
-    addRouter.post('/addbook',verifyToken,upload.single('img'),function(req,res){
+    
+    addRouter.post('/addblog',verifyToken,upload.single('img'),function(req,res){
         res.header("Access-Control-Allow-Origin", "*")
         res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS")
         img='http://localhost:3000/images/' + req.file.filename;
-        var book= {
+        var blog= {
             title:req.body.title,
             author:req.body.author,
             genre:req.body.genre,
@@ -48,8 +49,8 @@ function router(){
             img:img,
             link:req.body.link
         }
-        var bookItem= Bookdata(book);
-        bookItem.save();
+        var blogItem= Blogdata(blog);
+        blogItem.save();
         
     });
     

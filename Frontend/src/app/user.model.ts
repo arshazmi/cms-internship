@@ -4,8 +4,9 @@ export class UserModel{
         public lname:string,
         public username:string,
         public email:string,
-        public password:string
+        public password:string,
+        public _id:string,
+        public permission :string
     ){
-
     }
 }

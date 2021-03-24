@@ -1,7 +1,7 @@
-export class AuthorModel{
+export class BlogModel{
     constructor(
-        public name:string,
-        public book:string,
+        public title:string,
+        public author:string,
         public genre:string,
         public img:File,
         public details:string,

@@ -1,6 +1,6 @@
 const express = require('express');
-const booksrouter=express.Router();
-const Bookdata= require("../model/bookdata")
+const blogsrouter=express.Router();
+const Blogdata= require("../model/blogdata")
 
 const multer= require ('multer');
 const path=require('path');
@@ -17,17 +17,17 @@ const upload=multer({
 storage:storage
 });
 function router(){
-    booksrouter.get('/',function(req,res){
+    blogsrouter.get('/',function(req,res){
         res.header("Access-Control-Allow-Origin", "*")
         res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS")
-        Bookdata.find()
-        .then(function(books){
-            res.send(books)
+        Blogdata.find()
+        .then(function(blogs){
+            res.send(blogs)
         })
         
     });
 
-    booksrouter.put('/editbook/:id',upload.single('img'),function(req,res){
+    blogsrouter.put('/editblog/:id',upload.single('img'),function(req,res){
         const id=req.params.id;
         res.header("Access-Control-Allow-Origin", "*")
         res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS")
@@ -40,28 +40,28 @@ function router(){
             img:img,
             link:req.body.link
         }
-        Bookdata.findByIdAndUpdate({_id:id}, item, (err,doc)=>{
+        Blogdata.findByIdAndUpdate({_id:id}, item, (err,doc)=>{
                 if(!err){res.send(doc)}
              })
     });
-    booksrouter.delete('/deletebook/:id',function(req,res){
+    blogsrouter.delete('/deleteblog/:id',function(req,res){
         const id=req.params.id;
         res.header("Access-Control-Allow-Origin", "*")
         res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS")
-        Bookdata.findByIdAndRemove({_id:id},(err,doc)=>{
+        Blogdata.findByIdAndRemove({_id:id},(err,doc)=>{
         if(!err){res.send(doc);}
     });
     });
-    booksrouter.get('/:id',function(req,res){
+    blogsrouter.get('/:id',function(req,res){
         res.header("Access-Control-Allow-Origin", "*")
         res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS")
         const id=req.params.id
-        Bookdata.findOne({_id : id})
-        .then(function(book){
-            res.send(book)
+        Blogdata.findOne({_id : id})
+        .then(function(blog){
+            res.send(blog)
             });
     });
-    return booksrouter;
+    return blogsrouter;
 }
 
 

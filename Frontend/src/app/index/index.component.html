@@ -11,7 +11,9 @@
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li>
-          <a routerLink='/books' *ngIf="libraryService.loggedIn()">Posts</a>
+          <a routerLink='/blogs' *ngIf="libraryService.loggedIn()">Posts</a>
+        </li><li>
+          <a routerLink='/adminboard' *ngIf="libraryService.loggedIn() && libraryService.adminlogg()">Admin Board</a>
         </li>
       </ul>
       <ul class="nav navbar-right navbar-nav">

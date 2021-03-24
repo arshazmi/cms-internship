@@ -4,13 +4,13 @@ import { LibraryService } from '../library.service';
 import { UserModel } from '../user.model';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms'
 import { CustomValidationService } from '../custom-validation.service';
-
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: 'app-addadmin',
+  templateUrl: './addadmin.component.html',
+  styleUrls: ['./addadmin.component.css']
 })
-export class SignupComponent implements OnInit {
+export class AddadminComponent implements OnInit {
+
   hide=true;
   hidea=true;
   userItem=new UserModel('','','','','','','');
@@ -30,8 +30,8 @@ export class SignupComponent implements OnInit {
       validator:this.customValidator.passwordMatchValidator('password','confirmpassword')
     })
   }
-  Adduser(){
-    this.libraryService.newUser(this.userItem);
+  Addadmin(){
+    this.libraryService.newAdmin(this.userItem);
     alert("successfully Registered");
     this.router.navigate(['/login']);
   }

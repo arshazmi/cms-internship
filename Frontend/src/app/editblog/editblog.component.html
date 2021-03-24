@@ -1,0 +1,171 @@
+
+<header class="navbar navbar-bright navbar-fixed-top" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a routerLink='/' class="navbar-brand">Home</a>
+      </div>
+      <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li>
+            <a routerLink='/blogs' class="navbar-brand">Posts</a>
+          </li>
+          <li>
+            <a *ngIf="libraryService.loggedIn() && libraryService.adminlogg()" routerLink='/addblog'>Add Post</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-right navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
+            <ul class="dropdown-menu" style="padding:12px;">
+              <form class="form-inline">
+                <button type="submit" class="btn btn-default pull-right"><i
+                    class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left"
+                  placeholder="Search">
+              </form>
+            </ul>
+          </li>
+          <li><a *ngIf="libraryService.loggedIn()" (click)="logoutUser()">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div id="masthead">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Edit {{blogItem.title}}
+            <p class="lead"></p>
+          </h1>
+        </div>
+        <!-- <div class="col-md-5">
+            <div class="well well-lg">  -->
+        <div class="row">
+          <div class="col-sm-12">
+  
+  
+          </div>
+          <!-- </div>
+            </div> -->
+        </div>
+      </div>
+    </div><!-- /cont -->
+  
+    <div class="container">
+      <div class="row row1">
+        <div class="col-md-5">
+          <div class="top-spacer" style="width:25em;"></div>
+        </div>
+      </div>
+    </div><!-- /cont -->
+  
+  </div>
+  
+  
+  <div class="container">
+    <div class="row row1">
+  
+      <div class="col-md-5">
+  
+        <div class="panel newpanel" style="border-radius: 0px;">
+          <div class="panel-body">
+  
+  
+  
+            <!--/stories-->
+            <div class="row">
+              <br>
+              <!-- <div class="col-md-3"></div> -->
+              <div class="col-md-12 col-sm-5">
+                <form id="form-main" [formGroup]="editForm" (ngSubmit)='EditBlogfn()'>
+                  <div class="form-group">
+                    <input type="text" name="title" [(ngModel)]="blogItem.title" class="form-control" id="name"
+                      formControlName="title" placeholder="Title of Post" required>
+                    <div [class.d-none] *ngIf="editForm.get('title').invalid && editForm.get('title').touched"
+                      class="alert-danger">
+                      <div>
+                        This is a Required field
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <select name="genre" id="genre" [(ngModel)]="blogItem.genre" formControlName="genre"
+                      class="form-control" required>
+                      <option value="" disabled selected>Select District</option>
+                      <option value="Kasaragod">Kasaragod</option>
+                      <option value="Kannur">Kannur</option>
+                      <option value="Wayanad">Wayanad</option>
+                      <option value="Kozhikode">Kozhikode</option>
+                      <option value="Malappuram">Malappuram</option>
+                      <option value="Palakkad">Palakkad</option>
+                      <option value="Thrissur">Thrissur</option>
+                      <option value="Ernakulam">Ernakulam</option>
+                      <option value="Idukki">Idukki</option>
+                      <option value="Kottayam">Kottayam</option>
+                      <option value="Alappuzha">Alappuzha</option>
+                      <option value="Pathanamthitta">Pathanamthitta</option>
+                      <option value="Kollam">Kollam</option>
+                      <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                    </select>
+                    <div [class.d-none] *ngIf="editForm.get('genre').invalid && editForm.get('genre').touched"
+                      class="alert-danger">
+                      <div>
+                        This is a Required field
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="author" formControlName="author"
+                      [(ngModel)]="blogItem.author" id="author" placeholder="Your name" required>
+                    <div [class.d-none] *ngIf="editForm.get('author').invalid && editForm.get('author').touched"
+                      class="alert-danger">
+                      <div>
+                        This is a Required field
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <textarea type="text" class="form-control" name="details" formControlName="details"
+                      [(ngModel)]="blogItem.details" id="details" placeholder="what's on your mind?"
+                      style="height: 150px;" required></textarea>
+                    <div [class.d-none] *ngIf="editForm.get('details').invalid && editForm.get('details').touched"
+                      class="alert-danger">
+                      <div>
+                        This is a Required field
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="url" class="form-control" name="link" id="link" formControlName="link"
+                      [(ngModel)]="blogItem.link" placeholder="Where to Know More (url)" required>
+                    <div [class.d-none] *ngIf="editForm.get('link').invalid && editForm.get('link').touched"
+                      class="alert-danger">
+                      <div>
+                        This is a Required field
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="img">Image of Blog</label>
+                    <input name="img" type="file" formControlName="img" [(ngModel)]="blogItem.img" id="img"
+                      (change)="upload($event)" accept="image/*" required>
+                  </div>
+                  <br>
+                  <div class="text-center"><button type="submit" class="btn btn-success butn"
+                      [disabled]="editForm.invalid">Edit</button></div>
+                </form>
+  
+              </div>
+            </div>
+  
+  
+  
+          </div>
+          <!--/col-12-->
+        </div>
+      </div>
